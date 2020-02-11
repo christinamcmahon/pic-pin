@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_172629) do
   enable_extension "plpgsql"
 
   create_table "boards", force: :cascade do |t|
+    t.integer "user_id"
     t.text "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
