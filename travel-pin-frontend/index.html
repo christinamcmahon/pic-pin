@@ -14,9 +14,15 @@
             <a class="navbar-brand">
                 <h1>Travel Pin</h1>
             </a>
-            <input id="search-bar" type="search" name="search" placeholder="search a city..." value="" />
-            <input type="submit" value="Search">
-            <h3 id="current-user"></h3>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="search a city" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <div class="dropdown-menu">
+                <h3 id="current-user" class="dropdown-header">Test User</h3>
+                <a class="dropdown-item" href="#profile">Profile</a>
+                <a class="dropdown-item" href="#login">Logout</a>
+            </div>
         </nav><br>
     </header>
     <div class="card" style="width: 18rem;">
