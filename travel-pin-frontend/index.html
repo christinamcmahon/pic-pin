@@ -4,24 +4,30 @@
 <head>
     <meta charset="utf-8">
     <title>Travel Pin</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" ><h1>Travel Pin</h1></a>
+            <a class="navbar-brand">
+                <h1>Travel Pin</h1>
+            </a>
+            <input id="search-bar" type="search" name="search" placeholder="search a city..." value="" />
+            <input type="submit" value="Search">
             <h3 id="current-user"></h3>
         </nav><br>
     </header>
     <div class="card" style="width: 18rem;">
         <div class="container">
             <div .mxy-2></div>
-            <br><h2>Login</h2>
+            <br>
+            <h2>Login</h2>
             <form id="login">
                 Name:<b>
-                <p><input type="text" name="name" value="" /></p>
-                <p><input type="submit" value="Login"></p>
+                    <p><input type="text" name="name" value="" /></p>
+                    <p><input type="submit" value="Login"></p>
             </form>
             <h2>Sign Up</h2>
             <form id="signup">
