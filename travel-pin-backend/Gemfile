@@ -43,6 +43,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'active_model_serializers'
 
-# bootstrap
+# bundle bootstrap and jquery
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
