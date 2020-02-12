@@ -38,7 +38,7 @@ class BoardsController < ApplicationController
     end
 
     def board_params
-        params.require(:board).permit(:user_id, :note)
+        params.require(:board).permit(:user_id, :n)
     end
 
 end
