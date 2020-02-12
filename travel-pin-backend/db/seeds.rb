@@ -13,15 +13,19 @@ require 'csv'
 
 # a1 = Board.create(user_id: alicia.id, note: "hello!")
 # c1 = Board.create(user_id: xtina.id, note: "hola!")
-
+count = 0
 CSV.foreach(Rails.root.join('db/worldcities.csv'), headers: true) do |row|
-    
-    City.create({
-        name: row[1], 
-        country:row[4], 
-        lat: row[2], 
-        lng: row[3]
-    })
+
+    if(count < 100)
+        City.create({
+            name: row[1], 
+            country:row[4], 
+            lat: row[2], 
+            lng: row[3]
+        })
+    end
+    count += 1
+
 
 end
 
