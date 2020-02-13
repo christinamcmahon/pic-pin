@@ -47,8 +47,18 @@ function postUser(user) {
     })
         .then(res => {
             console.log(res)
-            const formsDiv = document.getElementById("forms-div")
-            formsDiv.style.display = "none"
+            clearPhotos()
+            const forms_div = document.getElementById("forms-div");
+            forms_div.innerHTML = "";
+            fetchRandomPhotos();
+            return res.json()
+        })
+        .then(data => {
+            console.log(data)
+            currentUser = data
+            const currentUserElement = document.getElementById("current-user")
+            currentUserElement.textContent = currentUser.name
+            showNavOptions()
         })
         .catch(err => console.log(`ERROR:${err}`))
 }
@@ -154,7 +164,9 @@ function fetchPhotos() {
 }
 
 function fetchRandomPhotos() {
-    fetch(`${API_BASE_URL}random?count=10`)
+    const rand = Math.floor((Math.random() * 5) + 10);
+    console.log(rand);
+    fetch(`${API_BASE_URL}random?count=${rand}`)
         .then((res) => {
             return res.json();
         })
@@ -240,8 +252,17 @@ function makePhotoCard(photo) {
     return div;
 }
 
+// board dropdown
 function fetchBoards() {
-
+    fetch("'http://localhost:3000/boards'")
+        .then((res) => {
+            return res.json();
+        })
+        .then((jsonData) => {
+            console.log(jsonData);
+        }).catch((error) => {
+            console.error("Fetch pictures Error", error);
+        });
 }
 
 function listenForExplore() {
