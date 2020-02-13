@@ -68,7 +68,7 @@ function validLogin(data, user) {
         console.log("valid user")
         currentUser = userExists
         currentUserElement.textContent = currentUser.name
-        //render explore page here??
+        showNavOptions()
     } else {
         alert("User Does Not Exist")
     }
@@ -111,23 +111,59 @@ function editUser(currentUser, newName) {
         .catch(err => console.log(`ERROR: ${err}`))
 }
 
-// fetch pics from unsplash api
+function showNavOptions() {
+    const formsDiv = document.getElementById("forms-div")
+    formsDiv.style.display = "none"
+    const navOptions = document.getElementById("nav-options")
+    navOptions.style.display = "block"
+}
+
+// photos from Unsplash API
 function fetchPics() {
     event.preventDefault();
     const search_input = document.querySelector('input[type="search"]');
-
-    // console.log(search_input.value);
     const search = search_input.value;
     fetch(`${API_BASE_URL}${search}`)
-
         .then((res) => {
             return res.json();
         })
         .then((jsonData) => {
             console.log(jsonData);
-
+            showPhotos(jsonData)
         }).catch((error) => {
             console.error("Fetch pictures Error", error);
         });
-
 }
+
+function showPhotos(photosArray) {
+    console.log(photosArray.results[0])
+    const photos = photosArray.results
+    photos.map(photo => addPhoto(photo))
+}
+
+function addPhoto(photo) {
+    const photos = document.getElementById("photos");
+    const photoCard = makePhotoCard(photo);
+    photos.appendChild(photoCard);
+}
+
+function makePhotoCard(photo) {
+    console.log(photo)
+    const div = document.createElement("div");
+    div.className = "card";
+
+    // make elements using api data...
+    const img = document.createElement("img")
+    img.src = photo.urls.regular
+
+
+    const h2 = document.createElement("h2")
+    h2.textContent = photo.tags[0].title
+
+    //add all elements to div
+    div.appendChild(img)
+    div.appendChild(h2)
+
+    return div;
+}
+
