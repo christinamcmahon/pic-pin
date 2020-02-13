@@ -16,7 +16,7 @@
             </a>
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="search a city" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="fetchPics()" >Search</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="fetchPics()">Search</button>
             </form>
             <div class="dropdown-menu">
                 <h3 id="current-user" class="dropdown-header">Test User</h3>
@@ -25,22 +25,34 @@
             </div>
         </nav><br>
     </header>
-    <div class="card" style="width: 18rem;">
+    <!-- forms -->
+    <div id="forms-div" class="card" style="width: 18rem;">
         <div class="container">
-            <div .mxy-2></div>
             <br>
-            <h2>Login</h2>
-            <form id="login">
-                Name:<b>
-                    <p><input type="text" name="name" value="" /></p>
-                    <p><input type="submit" value="Login"></p>
-            </form>
-            <h2>Sign Up</h2>
-            <form id="signup">
-                Name:<br>
-                <p><input type="text" name="name" value="" /></p>
-                <p><input type="submit" value="Sign Up" /></p>
-            </form>
+            <div>
+                <div id="login-div">
+                    <h2>Login</h2>
+                    <form id="login-form">
+                        <p><input type="text" name="name" value="" placeholder="username" /></p>
+                        <p><input type="submit" value="Login"></p>
+                    </form>
+                    <p><button id="signup-button">Sign Up</button></p>
+                </div>
+                <div id="signup-div" style="display: none;">
+                    <h2>Sign Up</h2>
+                    <form id="signup-form">
+                        <p><input type="text" name="name" value="" placeholder="username" /></p>
+                        <p><input type="submit" value="Sign Up" /></p>
+                    </form>
+                </div>
+                <div id="edit-div" style="display: none;">
+                    <h2>Edit Your Profile</h2>
+                    <form id="edit-form">
+                        <p><input id="edit-input" type="text" name="name" value="" /></p>
+                        <p><input type="submit" value="Update Profile" /></p>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <script src="./src/index.js"></script>
