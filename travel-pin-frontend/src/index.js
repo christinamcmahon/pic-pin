@@ -235,7 +235,24 @@ function makePhotoCard(photo) {
     // })
 
     // board dropdown
+    const dropdownDiv = document.createElement("div")
+    dropdownDiv.className = "dropdown"
 
+    const dropdownButton = document.createElement("button")
+    dropdownButton.className = "dropbtn"
+    dropdownButton.textContent = "Add to Board"
+    dropdownDiv.appendChild(dropdownButton)
+
+    const dropdownContentDiv = document.createElement("div")
+    dropdownContentDiv.className = "dropdown-content"
+
+
+    const a1 = document.createElement("a")
+    a1.textContent = "testing"
+    dropdownContentDiv.appendChild(a1)
+
+    dropdownDiv.appendChild(dropdownContentDiv)
+    divCardBody.appendChild(dropdownDiv)
 
     // const p = document.createElement("p")
     // p.className = "card-text"
