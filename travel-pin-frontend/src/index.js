@@ -33,7 +33,7 @@ function postUser(user) {
         body: JSON.stringify(user)
     })
         .then(res => console.log(res))
-        .catch(err => console.log(err))
+        .catch(err => console.log(`ERROR:${err}`))
 }
 
 // login
@@ -47,19 +47,19 @@ function loginForm() {
 }
 
 function loginUser(user) {
-    fetch(USER_URL)
+    fetch('http://localhost:3000/users')
         .then(res => res.json())
         .then(data => validUser(data, user))
-        .catch(err => console.log(err))
+        .catch(err => console.log(`ERROR:${err}`))
 }
 
 function validUser(data, user) {
     console.log(data);
-    let currentUserH3 = document.getElementById("current-user")
+    let currentUserElement = document.getElementById("current-user")
     let userExists = data.find(u => u.name == user.name)
     if (userExists) {
         currentUser = userExists
-        currentUserH3.textContent = currentUser.name
+        currentUserElement.textContent = currentUser.name
         //render explore page here??
         console.log(currentUser)
     } else {
@@ -67,24 +67,49 @@ function validUser(data, user) {
     }
 }
 
+// delete user
+function deleteUser(currentUser) {
+    fetch(`http://localhost:3000/users/${currentUser.id}`, {
+        method: "DELETE"
+    })
+}
+
+// edit user
+function editUser(currentUser, newName) {
+    fetch(`http://localhost:3000/users/${currentUser.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify({ name: newName })
+    })
+        .then(res => res.json())
+        .then(data => {
+            editedUser = data
+            let currentUserElement = document.getElementById("current-user")
+            currentUserElement.textContent = editedUser.name
+        })
+        .catch(err => console.log(`ERROR: ${err}`))
+}
 
 // fetch pics from unsplash api
 function fetchPics() {
     event.preventDefault();
     const search_input = document.querySelector('input[type="search"]');
-    
+
     console.log(search_input.value);
-  const search = search_input.value;
-  fetch( `${API_BASE_URL}${search}`)
-      
-    .then((res) => {
-          return res.json();
-      })
-      .then((jsonData) => {
-          console.log(jsonData);
-          
-      }).catch((error) => {
-          console.error("Fetch pictures Error", error);
-      });
+    const search = search_input.value;
+    fetch(`${API_BASE_URL}${search}`)
+
+        .then((res) => {
+            return res.json();
+        })
+        .then((jsonData) => {
+            console.log(jsonData);
+
+        }).catch((error) => {
+            console.error("Fetch pictures Error", error);
+        });
 
 }
