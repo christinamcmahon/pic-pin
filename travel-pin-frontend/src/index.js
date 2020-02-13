@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loginForm()
     listenForSignup()
     listenForExplore()
+    fetchBoards()
+    listenForModal()
 })
 
 // signup 
@@ -235,7 +237,24 @@ function makePhotoCard(photo) {
     // })
 
     // board dropdown
+    const dropdownDiv = document.createElement("div")
+    dropdownDiv.className = "dropdown"
 
+    const dropdownButton = document.createElement("button")
+    dropdownButton.className = "dropbtn"
+    dropdownButton.textContent = "Add to Board"
+    dropdownDiv.appendChild(dropdownButton)
+
+    const dropdownContentDiv = document.createElement("div")
+    dropdownContentDiv.className = "dropdown-content"
+
+
+    const a1 = document.createElement("a")
+    a1.textContent = "Create a New Board"
+    dropdownContentDiv.appendChild(a1)
+
+    dropdownDiv.appendChild(dropdownContentDiv)
+    divCardBody.appendChild(dropdownDiv)
 
     // const p = document.createElement("p")
     // p.className = "card-text"
@@ -254,7 +273,7 @@ function makePhotoCard(photo) {
 
 // board dropdown
 function fetchBoards() {
-    fetch("'http://localhost:3000/boards'")
+    fetch("http://localhost:3000/boards")
         .then((res) => {
             return res.json();
         })
@@ -271,4 +290,22 @@ function listenForExplore() {
         clearPhotos()
         fetchRandomPhotos()
     })
+}
+
+function listenForModal() {
+    const modalButton = document.getElementById("modal-button")
+    modalButton.addEventListener("click", () => {
+        toggleModal()
+    })
+}
+
+function toggleModal() {
+    const modal = document.getElementById("exampleModal")
+    if (modal.classList.contains("hide")) {
+        console.log("model is now visible")
+        modal.classList.remove("hide")
+    } else {
+        console.log("model is hidden")
+        modal.classList.add("hide")
+    }
 }
