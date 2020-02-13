@@ -21,21 +21,24 @@
             </a>
             <div id="nav-options" style="display: none;">
                 <ul class="navbar-nav mr-auto">
-                    <li class="navbar-item active">
-                        <a class="nav-link" href="#">Explore <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link" style="text-decoration: none;" id="current-user" href="#">User</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link" href="#" style="text-decoration: none;">Logout</a>
-                    </li>
-                    <form class="form-inline my-2 my-lg-0">
+                    <form class="form-inline my-1 my-lg-0">
                         <input class="form-control mr-sm-2" style="width: 20rem;" type="search" placeholder="search"
                             aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
                             onclick="fetchPhotos()">Search</button>
                     </form>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-item active">
+                            <a id="exploreA" class="nav-link" href="#">Explore <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="nav-link" style="text-decoration: none;" id="current-user" href="#">User</a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="nav-link" href="#" style="text-decoration: none;">Logout</a>
+                        </li>
+                    </ul>
                 </ul>
 
             </div>
@@ -72,11 +75,13 @@
         </div>
     </div>
     <!-- explore page -->
-    <div class="mx-5">
-        <div class="card-columns" id="photos">
+    <div id="main-div">
+        <div class="mx-5">
+            <div class="card-columns" id="photos">
+            </div>
         </div>
-    </div>
-    <script src="./src/index.js"></script>
+        </divid="main-div">
+        <script src="./src/index.js"></script>
 </body>
 
 </html>

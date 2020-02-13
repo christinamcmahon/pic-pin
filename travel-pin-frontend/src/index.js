@@ -7,13 +7,18 @@ let currentUser = null
 
 document.addEventListener('DOMContentLoaded', () => {
     loginForm()
+    listenForSignup()
+    listenForExplore()
+})
+
+// signup 
+function listenForSignup() {
     const signupButton = document.getElementById("signup-button")
     signupButton.addEventListener("click", () => {
         signupForm()
     })
-})
+}
 
-// signup 
 function signupForm() {
     const loginDiv = document.getElementById("login-div")
     loginDiv.style.display = "none"
@@ -119,9 +124,17 @@ function showNavOptions() {
     navOptions.style.display = "block"
 }
 
+// clear main area
+function clearPhotos() {
+    console.log("hiding main div")
+    const photos = document.getElementById("photos")
+    photos.innerHTML = ''
+}
+
 // photos from Unsplash API
 function fetchPhotos() {
     event.preventDefault();
+    clearPhotos()
     const search_input = document.querySelector('input[type="search"]');
     const search = search_input.value;
     fetch(`${API_BASE_URL}${search}`)
@@ -214,4 +227,10 @@ function makePhotoCard(photo) {
     return div;
 }
 
-
+function listenForExplore() {
+    const explore = document.getElementById("exploreA")
+    explore.addEventListener("click", () => {
+        clearPhotos()
+        fetchRandomPhotos()
+    })
+}
