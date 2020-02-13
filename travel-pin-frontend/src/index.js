@@ -5,6 +5,10 @@ let SEARCH = {};
 // track current user
 let currentUser = null
 
+// hearts
+const EMPTY_HEART = '♡'
+let FULL_HEART = '♥'
+
 document.addEventListener('DOMContentLoaded', () => {
     loginForm()
     listenForSignup()
@@ -207,10 +211,19 @@ function makePhotoCard(photo) {
     // heartBtn.id = "swapHeart"
     // heartBtn.type = "button"
     // heartBtn.className = "btn btn-default swap"
-    // const heartSpan = document.createElement("span")
-    // heartSpan.className = "glyphicon glyphicon-heart-empty"
-    // heartBtn.appendChild(heartSpan)
+    // heartBtn.innerHTML = EMPTY_HEART;
     // divCardBody.appendChild(heartBtn)
+
+    // heartBtn.addEventListener("click", () => {
+    //     if (heartBtn.innerHTML == FULL_HEART) {
+    //         heartBtn.innerHTML = EMPTY_HEART
+    //     } else {
+    //         heartBtn.innerHTML = FULL_HEART
+    //     }
+    // })
+
+    // board dropdown
+
 
     // const p = document.createElement("p")
     // p.className = "card-text"
@@ -225,6 +238,10 @@ function makePhotoCard(photo) {
     div.appendChild(divCardBody)
 
     return div;
+}
+
+function fetchBoards() {
+
 }
 
 function listenForExplore() {
