@@ -5,15 +5,24 @@ let SEARCH = {};
 // track current user
 let currentUser = null
 
+// hearts
+const EMPTY_HEART = '♡'
+let FULL_HEART = '♥'
+
 document.addEventListener('DOMContentLoaded', () => {
     loginForm()
+    listenForSignup()
+    listenForExplore()
+})
+
+// signup 
+function listenForSignup() {
     const signupButton = document.getElementById("signup-button")
     signupButton.addEventListener("click", () => {
         signupForm()
     })
-})
+}
 
-// signup 
 function signupForm() {
     const loginDiv = document.getElementById("login-div")
     loginDiv.style.display = "none"
@@ -69,6 +78,7 @@ function validLogin(data, user) {
         currentUser = userExists
         currentUserElement.textContent = currentUser.name
         showNavOptions()
+        fetchRandomPhotos()
     } else {
         alert("User Does Not Exist")
     }
@@ -118,12 +128,33 @@ function showNavOptions() {
     navOptions.style.display = "block"
 }
 
+// clear main area
+function clearPhotos() {
+    console.log("hiding main div")
+    const photos = document.getElementById("photos")
+    photos.innerHTML = ''
+}
+
 // photos from Unsplash API
-function fetchPics() {
+function fetchPhotos() {
     event.preventDefault();
+    clearPhotos()
     const search_input = document.querySelector('input[type="search"]');
     const search = search_input.value;
     fetch(`${API_BASE_URL}${search}`)
+        .then((res) => {
+            return res.json();
+        })
+        .then((jsonData) => {
+            console.log(jsonData);
+            showPhotos(jsonData)
+        }).catch((error) => {
+            console.error("Fetch pictures Error", error);
+        });
+}
+
+function fetchRandomPhotos() {
+    fetch(`${API_BASE_URL}random?count=10`)
         .then((res) => {
             return res.json();
         })
@@ -149,21 +180,74 @@ function addPhoto(photo) {
 
 function makePhotoCard(photo) {
     console.log(photo)
-    const div = document.createElement("div");
-    div.className = "card";
+    const div = document.createElement("div")
+    div.className = "card mb-3"
+    // div.style.width = "26rem"
 
-    // make elements using api data...
     const img = document.createElement("img")
+    img.className = "card-img-top"
     img.src = photo.urls.regular
 
+    const divCardBody = document.createElement("div")
+    divCardBody.className = "card-body"
 
-    const h2 = document.createElement("h2")
-    h2.textContent = photo.tags[0].title
+    // photographer name
+    const h5 = document.createElement("h5")
+    h5.class = "card-title"
+    h5.textContent = photo.user.name
+    divCardBody.appendChild(h5)
 
-    //add all elements to div
+    // photographer instagram
+    const userInstagram = photo.user.instagram_username
+    if (userInstagram != null) {
+        const h6 = document.createElement("h6")
+        h6.className = "card-text"
+        h6.textContent = ` @${userInstagram}`
+        h5.appendChild(h6)
+    }
+
+    // like button
+    // const heartBtn = document.createElement("button")
+    // heartBtn.id = "swapHeart"
+    // heartBtn.type = "button"
+    // heartBtn.className = "btn btn-default swap"
+    // heartBtn.innerHTML = EMPTY_HEART;
+    // divCardBody.appendChild(heartBtn)
+
+    // heartBtn.addEventListener("click", () => {
+    //     if (heartBtn.innerHTML == FULL_HEART) {
+    //         heartBtn.innerHTML = EMPTY_HEART
+    //     } else {
+    //         heartBtn.innerHTML = FULL_HEART
+    //     }
+    // })
+
+    // board dropdown
+
+
+    // const p = document.createElement("p")
+    // p.className = "card-text"
+    // p.textContent = photo.description
+    // divCardBody.appendChild(p)
+
+    // const a = document.createElement("a")
+    // a.className = "btn"
+    // a.href = "#showPhoto"
+
     div.appendChild(img)
-    div.appendChild(h2)
+    div.appendChild(divCardBody)
 
     return div;
 }
 
+function fetchBoards() {
+
+}
+
+function listenForExplore() {
+    const explore = document.getElementById("exploreA")
+    explore.addEventListener("click", () => {
+        clearPhotos()
+        fetchRandomPhotos()
+    })
+}
