@@ -5,16 +5,12 @@ let SEARCH = {};
 // track current user
 let currentUser = null
 
-// hearts
-const EMPTY_HEART = '♡'
-let FULL_HEART = '♥'
-
 document.addEventListener('DOMContentLoaded', () => {
     loginForm()
     listenForSignup()
     listenForExplore()
     fetchBoards()
-    // listenForModal()
+    listenForProfile()
 })
 
 // signup 
@@ -135,6 +131,7 @@ function editUser(currentUser, newName) {
         .catch(err => console.log(`ERROR: ${err}`))
 }
 
+// nav bar
 function showNavOptions() {
     const formsDiv = document.getElementById("forms-div")
     formsDiv.style.display = "none"
@@ -142,7 +139,7 @@ function showNavOptions() {
     navOptions.style.display = "block"
 }
 
-// clear main area
+// clear photos
 function clearPhotos() {
     console.log("hiding photos")
     const photos = document.getElementById("photos")
@@ -222,22 +219,6 @@ function makePhotoCard(photo) {
         h5.appendChild(h6)
     }
 
-    // like button
-    // const heartBtn = document.createElement("button")
-    // heartBtn.id = "swapHeart"
-    // heartBtn.type = "button"
-    // heartBtn.className = "btn btn-default swap"
-    // heartBtn.innerHTML = EMPTY_HEART;
-    // divCardBody.appendChild(heartBtn)
-
-    // heartBtn.addEventListener("click", () => {
-    //     if (heartBtn.innerHTML == FULL_HEART) {
-    //         heartBtn.innerHTML = EMPTY_HEART
-    //     } else {
-    //         heartBtn.innerHTML = FULL_HEART
-    //     }
-    // })
-
     // board dropdown
     const dropdownDiv = document.createElement("div")
     dropdownDiv.className = "dropdown"
@@ -258,19 +239,18 @@ function makePhotoCard(photo) {
     dropdownDiv.appendChild(dropdownContentDiv)
     divCardBody.appendChild(dropdownDiv)
 
-    // const p = document.createElement("p")
-    // p.className = "card-text"
-    // p.textContent = photo.description
-    // divCardBody.appendChild(p)
-
-    // const a = document.createElement("a")
-    // a.className = "btn"
-    // a.href = "#showPhoto"
-
     div.appendChild(img)
     div.appendChild(divCardBody)
 
     return div;
+}
+
+function listenForExplore() {
+    const explore = document.getElementById("exploreA")
+    explore.addEventListener("click", () => {
+        clearPhotos()
+        fetchRandomPhotos()
+    })
 }
 
 // board dropdown
@@ -286,35 +266,34 @@ function fetchBoards() {
         });
 }
 
-function listenForExplore() {
-    const explore = document.getElementById("exploreA")
-    explore.addEventListener("click", () => {
-        clearPhotos()
-        fetchRandomPhotos()
-    })
-}
-
-// function listenForModal() {
-//     const modalButton = document.getElementById("modal-button")
-//     modalButton.addEventListener("click", () => {
-//         toggleModal()
-//     })
-// }
-
 function hideModal() {
     const modal = document.getElementById("board-modal")
     modal.classList.add("hide")
-    // modal.classList.add("dispose")
     modal.classList.remove("show")
-    // if (modal.classList.contains("hide")) {
-    //     console.log("modal is now visible")
-    //     modal.classList.remove("hide")
-    // } else {
-    //     console.log("modal is hidden")
-    //     modal.classList.add("hide")
-    // }
 }
 
+// profile
+function listenForProfile() {
+    const profile = document.getElementById("user-profile")
+    profile.addEventListener("click", () => {
+        clearPhotos()
+        showProfile()
+    })
+}
+
+function showProfile() {
+    const profileDiv = document.getElementById("profile-div")
+    const userNameH2 = document.createElement("h2")
+    userNameH2.textContent = currentUser.name
+    const editButton = document.createElement("button")
+    editButton.type = "button"
+    editButton.className = "btn btn-link"
+    editButton.setAttribute("data-toggle", "modal")
+    editButton.setAttribute("data-target", "#edit-user-modal")
+    editButton.textContent = "Edit"
+    userNameH2.appendChild(editButton)
+    profileDiv.appendChild(userNameH2)
+}
 
 //<----------------------------------------------------------------------------->
 
@@ -337,8 +316,8 @@ function filloutDropDown() {
     });
 }
 
+// new board
 function createBoard() {
-    const newBoardButton = document.getElementById("new-board-button");
     const newBoardForm = document.getElementById("new-board-form")
     newBoardForm.addEventListener("submit", event => {
         event.preventDefault()
@@ -352,21 +331,12 @@ function createBoard() {
 
         hideModal()
     })
-    // newBoardButton.addEventListener("submit", event => {
-    //     event.preventDefault()
-    //     const titleText = document.getElementById("title-name");
-    //     console.log("Title", titleText.value);
-    //     const noteText = document.getElementById("note-text");
-    //     console.log("Note", noteText.value);
-    //     // hideModal()
-    // })
 }
 
 
 function postBoard(title, note) {
     console.log("TITLE", title)
     console.log("NOTe", note)
-
 
     fetch('http://localhost:3000/boards', {
         method: 'POST',
@@ -386,9 +356,6 @@ function postBoard(title, note) {
         })
         .then(data => {
             console.log(data)
-
-
         })
         .catch(err => console.log(`ERROR:${err}`))
-
 }
