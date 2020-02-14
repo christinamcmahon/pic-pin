@@ -44,7 +44,6 @@ function postUser(user) {
         body: JSON.stringify(user)
     })
         .then(res => {
-            console.log(res)
             clearPhotos()
             const forms_div = document.getElementById("forms-div");
             forms_div.innerHTML = "";
@@ -157,7 +156,6 @@ function fetchPhotos() {
             return res.json();
         })
         .then((jsonData) => {
-            console.log(jsonData);
             showPhotos(jsonData)
         }).catch((error) => {
             console.error("Fetch pictures Error", error);
@@ -166,13 +164,11 @@ function fetchPhotos() {
 
 function fetchRandomPhotos() {
     const rand = Math.floor((Math.random() * 5) + 10);
-    console.log(rand);
     fetch(`${API_BASE_URL}random?count=${rand}`)
         .then((res) => {
             return res.json();
         })
         .then((jsonData) => {
-            console.log(jsonData);
             showPhotos(jsonData)
         }).catch((error) => {
             console.error("Fetch pictures Error", error);
@@ -180,7 +176,6 @@ function fetchRandomPhotos() {
 }
 
 function showPhotos(photosArray) {
-    console.log(photosArray.results[0])
     const photos = photosArray.results
     photos.map(photo => addPhoto(photo))
 }
@@ -232,9 +227,13 @@ function makePhotoCard(photo) {
     dropdownContentDiv.className = "dropdown-content"
 
 
+
     const a1 = document.createElement("a")
-    a1.textContent = "Create a New Board"
-    dropdownContentDiv.appendChild(a1)
+    a1.textContent = "New Board"
+    a1.style.color = "green"
+
+    fetchBoards(dropdownContentDiv, a1)
+
 
     dropdownDiv.appendChild(dropdownContentDiv)
     divCardBody.appendChild(dropdownDiv)
@@ -254,13 +253,28 @@ function listenForExplore() {
 }
 
 // board dropdown
-function fetchBoards() {
+function fetchBoards(dropdownContentDiv, a1) {
     fetch("http://localhost:3000/boards")
         .then((res) => {
             return res.json();
         })
         .then((jsonData) => {
             console.log(jsonData);
+            const boards = []
+            jsonData.forEach(board => {
+                if(board.user_id == currentUser.id){
+                    boards.push(board)
+                }
+            });
+            console.log(boards)
+            boards.forEach(board => {
+                const a = document.createElement("a")
+                a.innerText = board.title
+                dropdownContentDiv.appendChild(a)
+                // dropdownContentDiv.appendChild(a1)
+
+                
+            });
         }).catch((error) => {
             console.error("Fetch pictures Error", error);
         });
@@ -313,6 +327,9 @@ function filloutDropDown() {
 
     logout.addEventListener("click", () => {
         console.log("CLicked on logout");
+        document.location.reload(true);
+
+
     });
 }
 
