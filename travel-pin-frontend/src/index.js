@@ -101,16 +101,16 @@ function deleteUser(currentUser) {
 }
 
 // edit user
-function editUserForm() {
-    let editForm = document.getElementById("edit-form")
-    let editInput = document.getElementById("edit-input")
-    editInput.value = currentUser.name
-    editForm.addEventListener("submit", event => {
-        event.preventDefault()
-        let newName = editInput.value
-        editUser(currentUser, newName)
-    })
-}
+// function editUserForm() {
+//     let editForm = document.getElementById("edit-form")
+//     let editInput = document.getElementById("edit-input")
+//     editInput.value = currentUser.name
+//     editForm.addEventListener("submit", event => {
+//         event.preventDefault()
+//         let newName = editInput.value
+//         editUser(currentUser, newName)
+//     })
+// }
 
 function editUser(currentUser, newName) {
     fetch(`http://localhost:3000/users/${currentUser.id}`, {
@@ -138,11 +138,17 @@ function showNavOptions() {
     navOptions.style.display = "block"
 }
 
-// clear photos
+// clear main div items
 function clearPhotos() {
-    console.log("hiding photos")
+    console.log("hiding dom")
     const photos = document.getElementById("photos")
     photos.innerHTML = ''
+}
+
+function clearProfile() {
+    console.log("hiding profile")
+    const profile = document.getElementById("profile-div")
+    profile.innerHTML = ''
 }
 
 // photos from Unsplash API
@@ -169,6 +175,7 @@ function fetchRandomPhotos() {
             return res.json();
         })
         .then((jsonData) => {
+            clearProfile()
             showPhotos(jsonData)
         }).catch((error) => {
             console.error("Fetch pictures Error", error);
@@ -262,7 +269,7 @@ function fetchBoards(dropdownContentDiv, a1) {
             console.log(jsonData);
             const boards = []
             jsonData.forEach(board => {
-                if(board.user_id == currentUser.id){
+                if (board.user_id == currentUser.id) {
                     boards.push(board)
                 }
             });
@@ -272,8 +279,6 @@ function fetchBoards(dropdownContentDiv, a1) {
                 a.innerText = board.title
                 dropdownContentDiv.appendChild(a)
                 // dropdownContentDiv.appendChild(a1)
-
-                
             });
         }).catch((error) => {
             console.error("Fetch pictures Error", error);
@@ -328,8 +333,6 @@ function filloutDropDown() {
     logout.addEventListener("click", () => {
         console.log("CLicked on logout");
         document.location.reload(true);
-
-
     });
 }
 
