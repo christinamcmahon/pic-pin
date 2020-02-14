@@ -60,25 +60,32 @@
     </header>
 
     <!-- forms -->
-    <div id="forms-div" class="card" style="width: 18rem;">
-        <div class="container">
-            <br>
-            <div>
-                <div id="login-div">
-                    <h2>Login</h2>
-                    <form id="login-form">
-                        <p><input type="text" name="name" value="" placeholder="username" /></p>
-                        <p><input type="submit" value="Login"></p>
-                    </form>
-                    <p><button id="signup-button">Sign Up</button></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-6">
+                <div id="forms-div" class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <div id="login-div">
+                        <h2>Login</h2>
+                        <form id="login-form">
+                            <p><input type="text" name="name" value="" placeholder="username" /></p>
+                            <p><input type="submit" value="Login"></p>
+                        </form>
+                        <p><button id="signup-button">Sign Up</button></p>
+                    </div>
+                    <div id="signup-div" style="display: none;">
+                        <h2>Sign Up</h2>
+                        <form id="signup-form">
+                            <p><input type="text" name="name" value="" placeholder="username" /></p>
+                            <p><input type="submit" value="Sign Up" /></p>
+                        </form>
+                    </div>
                 </div>
-                <div id="signup-div" style="display: none;">
-                    <h2>Sign Up</h2>
-                    <form id="signup-form">
-                        <p><input type="text" name="name" value="" placeholder="username" /></p>
-                        <p><input type="submit" value="Sign Up" /></p>
-                    </form>
-                </div>
+            </div>
+            </div>
+        </div>
+    </div>
                 <!-- <div id="edit-div" style="display: none;">
                     <h2>Edit Your Profile</h2>
                     <form id="edit-form">
