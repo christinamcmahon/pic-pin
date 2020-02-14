@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_172629) do
   enable_extension "plpgsql"
 
   create_table "boards", force: :cascade do |t|
+    t.string "title"
     t.integer "user_id"
     t.text "note"
     t.datetime "created_at", precision: 6, null: false
@@ -33,9 +34,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_172629) do
 
   create_table "photos", force: :cascade do |t|
     t.integer "board_id"
-    t.integer "city_id"
-    t.string "photographer"
-    t.string "download"
+    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
