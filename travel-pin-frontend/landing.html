@@ -7,85 +7,87 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
-
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#"><h2>Pic Pin</h2></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-        <div class="navbar-collapse collapse" id="navbarColor01" style="">
-            <ul class="navbar-nav mr-auto">
+      <!-- nav bar -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top scrolling-navbar">
+        <a class="navbar-brand" href="#">
+          <h2>Pic Pin</h2>
+        </a>
+        <div class="navbar-collapse collapse" id="navbarSupportedContent-7">
+          <ul class="navbar-nav mr-auto"> <!--mr = left align?? -->
+            <!-- explore button -->
               <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a id="exploreA" class="nav-link" href="#">Explore 
+                  <span class="sr-only">(current)</span>
+                </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+              <!-- create board -->
+              <button id="modal-button" type="button" class="btn btn-link" data-toggle="modal"
+                    data-target="#board-modal" style="color: aliceblue;">Create Board</button>
+              <!-- drop down  -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown link
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" id="user-profile" href="#">Profile</a>
+                  <a class="dropdown-item" id="user-logout" href="#">Logout</a>
+                </div>
               </li>
             </ul>
+
+            <!-- search bar -->
+            <ul class="navbar-nav ml-auto"> <!--ml = right align?? -->
             <form class="form-inline">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+              <div class="md-form my-0"> <!--added-->
+              <input class="form-control mr-sm-2" style="width: 20rem;" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-info my-2 my-sm-0" type="submit" onclick="fetchPhotos()">Search</button>
             </form>
+          </ul>
         </div>
-    </nav>
+    </nav><br>
+  </header>
 
-
-
-        
-        <!-- <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" ><h1>Travel Pin</h1></a>
-            <h3 id="current-user"></h3>
-        </nav><br> -->
-    </header>
-    <div>
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown button
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+  <br><br><br>
+  
+  <!-- Full Page Intro -->
+  <div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(11).jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100%;">
+    <div class="container">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
+          <h1 class="h1-responsive font-weight-bold mt-sm-5">Welcome. </h1>
+          <hr class="hr-light">
+          <h6 class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt
+          dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea dolor molestiae
+          iste.</h6>
+                <div id="forms-div" class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <div id="login-div">
+                            <h2>Login</h2>
+                            <form id="login-form">
+                                <p><input type="text" name="name" value="" placeholder="username" /></p>
+                                <p><input type="submit" value="Login"></p>
+                            </form>
+                            <p><button id="signup-button">Sign Up</button></p>
+                        </div>
+                        <div id="signup-div" style="display: none;">
+                            <h2>Sign Up</h2>
+                            <form id="signup-form">
+                                <p><input type="text" name="name" value="" placeholder="username" /></p>
+                                <p><input type="submit" value="Sign Up" /></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <br><br><br><br><br><br>
           </div>
-
-    <!-- Jumbotron -->
-<div class="jumbotron text-center">
-
-    <!-- Title -->
-    <h4 class="card-title h4 pb-2"><strong>My adventure</strong></h4>
-
-    <!-- Card image -->
-    <div class="view overlay my-4">
-        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" class="img-fluid" alt="">
-        <a href="#">
-        <div class="mask rgba-white-slight"></div>
-        </a>
+        </div>
+      </div>
     </div>
-
-    <h5 class="indigo-text h5 mb-4">Photography</h5>
-
-    <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-
-    <!-- Linkedin -->
-    <a class="fa-lg p-2 m-2 li-ic"><i class="fab fa-linkedin-in grey-text"></i></a>
-    <!-- Twitter -->
-    <a class="fa-lg p-2 m-2 tw-ic"><i class="fab fa-twitter grey-text"></i></a>
-    <!-- Dribbble -->
-    <a class="fa-lg p-2 m-2 fb-ic"><i class="fab fa-facebook-f grey-text"></i></a>
-
-    </div>
-    <!-- Jumbotron -->
+  </div>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

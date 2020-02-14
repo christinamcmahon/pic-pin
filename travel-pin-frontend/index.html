@@ -19,29 +19,24 @@
 </head>
 
 <body>
+    <!-- Main navigation -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between fixed-top scrolling-navbar">
             <a class="navbar-brand">
-                <h1>Pic Pin</h1>
+                <h2>Pic Pin</h2>
             </a>
             <div id="nav-options" style="display: none;">
-                <ul class="navbar-nav mr-auto">
-                    <!-- search bar -->
-                    <form class="form-inline my-1 my-lg-0">
-                        <input class="form-control mr-sm-2" style="width: 20rem;" type="search" placeholder="search"
-                            aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                            onclick="fetchPhotos()">Search</button>
-                    </form>
-                    <ul class="navbar-nav ml-auto">
+                <div class="navbar-collapse collapse" id="navbarSupportedContent-7">
+                    <ul class="navbar-nav mr-auto">
                         <!-- explore button -->
                         <li class="navbar-item active">
-                            <a id="exploreA" class="nav-link" href="#">Explore <span
+                            <a id="exploreA" class="nav-link" href="#"> Explore <span
                                     class="sr-only">(current)</span></a>
                         </li>
                         <!-- new board button -->
                         <button id="modal-button" type="button" class="btn btn-link" data-toggle="modal"
-                            data-target="#board-modal" style="color: aliceblue;">New Board</button>
+                            data-target="#board-modal" style="color: aliceblue;">Create Board</button>
                         <!-- dropdown -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
@@ -54,118 +49,127 @@
                             </div>
                         </li>
                     </ul>
-                </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <!-- search bar -->
+                        <form class="form-inline my-1 my-lg-0">
+                            <div class="md-form my-0">
+                                <!--added-->
+                                <input class="form-control mr-sm-2" style="width: 20rem;" type="search"
+                                    placeholder="search" aria-label="Search">
+                                <button class="btn btn-outline-info my-2 my-sm-0" type="submit"
+                                    onclick="fetchPhotos()">Search</button>
+                        </form>
+                    </ul>
+
+                </div>
             </div>
-        </nav><br>
+        </nav>
     </header>
 
-    <!-- forms -->
-    <div class="container">
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-6">
-                <div id="forms-div" class="card" style="width: 18rem;">
-                    <div class="card-body">
-                    <div id="login-div">
-                        <h2>Login</h2>
-                        <form id="login-form">
-                            <p><input type="text" name="name" value="" placeholder="username" /></p>
-                            <p><input type="submit" value="Login"></p>
-                        </form>
-                        <p><button id="signup-button">Sign Up</button></p>
+    <!-- Forms -->
+    <!-- <div class="bg"></div> -->
+    <div id="bg" class="view"
+        style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(11).jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-4"></div>
+                <div id="landing" class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft"
+                    data-wow-delay="0.3s">
+                    <h1 class="h1-responsive font-weight-bold mt-sm-5"><br>Welcome. </h1>
+                    <hr class="hr-light">
+                    <h6 class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi
+                        fuga nesciunt
+                        dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea dolor molestiae
+                        iste.</h6>
+                    <div id="forms-div" class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <div id="login-div">
+                                <h2>Login</h2>
+                                <form id="login-form">
+                                    <p><input type="text" name="name" value="" placeholder="username" /></p>
+                                    <p><input type="submit" value="Login"></p>
+                                </form>
+                                <p><button id="signup-button">Sign Up</button></p>
+                            </div>
+                            <div id="signup-div" style="display: none;">
+                                <h2>Sign Up</h2>
+                                <form id="signup-form">
+                                    <p><input type="text" name="name" value="" placeholder="username" /></p>
+                                    <p><input type="submit" value="Sign Up" /></p>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div id="signup-div" style="display: none;">
-                        <h2>Sign Up</h2>
-                        <form id="signup-form">
-                            <p><input type="text" name="name" value="" placeholder="username" /></p>
-                            <p><input type="submit" value="Sign Up" /></p>
+                </div>
+            </div>
+        </div>
+        <!-- new board modal -->
+        <div class="modal fade hide" id="board-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="new-board">New Board</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="new-board-form">
+                            <div class="form-group">
+                                <label for="title-name" class="col-form-label">Title:</label>
+                                <input type="text" class="form-control" id="title-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="note-text" class="col-form-label">Note:</label>
+                                <textarea class="form-control" id="note-text"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" id="new-board-button" value="Create Board"></input>
+                            </div>
                         </form>
                     </div>
                 </div>
-<<<<<<< HEAD
-            </div>
             </div>
         </div>
-    </div>
-                <!-- <div id="edit-div" style="display: none;">
-                    <h2>Edit Your Profile</h2>
-                    <form id="edit-form">
-                        <p><input id="edit-input" type="text" name="name" value="" /></p>
-                        <p><input type="submit" value="Update Profile" /></p>
-                    </form>
-                </div> -->
-=======
->>>>>>> profile-branch
-            </div>
-        </div>
-    </div>
-    <!-- new board modal -->
-    <div class="modal fade hide" id="board-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="new-board">New Board</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="new-board-form">
-                        <div class="form-group">
-                            <label for="title-name" class="col-form-label">Title:</label>
-                            <input type="text" class="form-control" id="title-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="note-text" class="col-form-label">Note:</label>
-                            <textarea class="form-control" id="note-text"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="submit" id="new-board-button" value="Create Board"></input>
-                        </div>
-                    </form>
+        <!-- edit user modal -->
+        <div class="modal fade hide" id="edit-user-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="edit-user-h5">Edit Your Profile</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit-user-form">
+                            <div class="form-group">
+                                <label for="user-name" class="col-form-label">Name:</label>
+                                <input type="text" class="form-control" id="user-name">
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" id="new-board-button" value="Update Profile"></input>
+                                <button id="delete-user" type="button" style="color:red;">Delete</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- edit user modal -->
-    <div class="modal fade hide" id="edit-user-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="edit-user-h5">Edit Your Profile</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="edit-user-form">
-                        <div class="form-group">
-                            <label for="user-name" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="user-name">
-                        </div>
-                        <div class="modal-footer">
-                            <input type="submit" id="new-board-button" value="Update Profile"></input>
-                            <button id="delete-user" type="button" style="color:red;">Delete</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- photos -->
-    <div id="main-div">
-        <div class="mx-5">
-            <!-- photos -->
-            <div class="card-columns" id="photos"></div>
-            <!-- profile -->
-            <div id="profile-div" class="container">
-                <!-- boards -->
+        <!-- photos -->
+        <div id="main-div">
+            <div class="mx-5">
+                <!-- photos -->
                 <div class="card-columns" id="photos"></div>
+                <!-- profile -->
+                <div id="profile-div" class="container">
+                    <!-- boards -->
+                    <div class="card-columns" id="photos"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <script src="./src/index.js"></script>
+        <script src="./src/index.js"></script>
 </body>
 
 </html>

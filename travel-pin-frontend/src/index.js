@@ -56,7 +56,7 @@ function postUser(user) {
             showNavOptions()
             filloutDropDown() //adds event listener on dropdown menu
             createBoard();
-
+            hideBg()
         })
         .catch(err => console.log(`ERROR:${err}`))
 }
@@ -87,7 +87,7 @@ function validLogin(data, user) {
         fetchRandomPhotos()
         filloutDropDown() //adds event listener on dropdown menu
         createBoard()
-
+        hideBg()
     } else {
         alert("User Does Not Exist")
     }
@@ -108,7 +108,7 @@ function deleteUser(currentUser) {
     }).then(res => {
         if (res.status == 200) {
             console.log("user deleted")
-            logout()
+            document.location.reload(true);
         }
     })
 }
@@ -156,6 +156,7 @@ function listenForProfile() {
 
 function showProfile() {
     const profileDiv = document.getElementById("profile-div")
+    profileDiv.innerHTML = ''
     const userNameH2 = document.createElement("h2")
     userNameH2.textContent = currentUser.name
     const editButton = document.createElement("button")
@@ -174,6 +175,15 @@ function showNavOptions() {
     formsDiv.style.display = "none"
     const navOptions = document.getElementById("nav-options")
     navOptions.style.display = "block"
+}
+
+// hide bg image
+function hideBg() {
+    console.log('hide bg!!')
+    const landing = document.getElementById("landing")
+    landing.innerHTML = ''
+    const bg = document.getElementById("bg")
+    bg.style = ''
 }
 
 // clear main div items
@@ -196,12 +206,9 @@ function fetchPhotos() {
     const search_input = document.querySelector('input[type="search"]');
     const search = search_input.value;
     fetch(`${API_BASE_URL}${search}`)
-        .then((res) => {
-            return res.json();
-        })
-        .then((jsonData) => {
-            showPhotos(jsonData)
-        }).catch((error) => {
+        .then(res => res.json())
+        .then(jsonData => showPhotos(jsonData))
+        .catch(error => {
             console.error("Fetch pictures Error", error);
         });
 }
@@ -209,13 +216,12 @@ function fetchPhotos() {
 function fetchRandomPhotos() {
     const rand = Math.floor((Math.random() * 5) + 10);
     fetch(`${API_BASE_URL}random?count=${rand}`)
-        .then((res) => {
-            return res.json();
-        })
-        .then((jsonData) => {
+        .then(res => res.json())
+        .then(jsonData => {
             clearProfile()
             showPhotos(jsonData)
-        }).catch((error) => {
+        })
+        .catch(error => {
             console.error("Fetch pictures Error", error);
         });
 }
@@ -340,14 +346,14 @@ function filloutDropDown() {
     const profile = document.getElementById("user-profile");
 
     profile.addEventListener("click", () => {
-        console.log("CLicked on Profile");
+        console.log("Clicked on Profile");
     });
 
     const logout = document.getElementById("user-logout");
 
     logout.addEventListener("click", () => {
-        console.log("CLicked on logout");
-        logout()
+        console.log("Clicked on logout");
+        document.location.reload(true);
     });
 }
 
@@ -393,8 +399,6 @@ function postBoard(title, note) {
             console.log(res)
             return res.json()
         })
-        .then(data => {
-            console.log(data)
-        })
+        .then(data => console.log(data))
         .catch(err => console.log(`ERROR:${err}`))
 }
