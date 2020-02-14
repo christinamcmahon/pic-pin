@@ -58,9 +58,9 @@ function postUser(user) {
         .then(data => {
             console.log(data)
             currentUser = data
-            const currentUserElement = document.getElementById("current-user")
-            currentUserElement.textContent = currentUser.name
             showNavOptions()
+            filloutDropDown() //adds event listener on dropdown menu
+
         })
         .catch(err => console.log(`ERROR:${err}`))
 }
@@ -83,14 +83,14 @@ function loginUser(user) {
 }
 
 function validLogin(data, user) {
-    let currentUserElement = document.getElementById("current-user")
     let userExists = data.find(userObj => userObj.name == user.name)
     if (userExists) {
         console.log("valid user")
         currentUser = userExists
-        currentUserElement.textContent = currentUser.name
         showNavOptions()
         fetchRandomPhotos()
+        filloutDropDown() //adds event listener on dropdown menu
+
     } else {
         alert("User Does Not Exist")
     }
@@ -308,4 +308,32 @@ function toggleModal() {
         console.log("model is hidden")
         modal.classList.add("hide")
     }
+}
+
+
+//<----------------------------------------------------------------------------->
+
+// ERICS EDITS
+
+function filloutDropDown() {
+    const navBar = document.getElementById("navbarDropdownMenuLink");
+    navBar.innerText = currentUser.name;
+
+    const profile = document.getElementById("user-profile");
+
+    profile.addEventListener("click", (event) => {
+
+        console.log("CLicked on Profile");
+
+    });
+
+    const logout = document.getElementById("user-logout");
+
+    logout.addEventListener("click", (event) => {
+
+        console.log("CLicked on logout");
+
+    });
+
+
 }

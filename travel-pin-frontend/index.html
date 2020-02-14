@@ -37,23 +37,16 @@
                             <a id="exploreA" class="nav-link" href="#">Explore <span
                                     class="sr-only">(current)</span></a>
                         </li>
-                        <button id="modal-button" type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
-                        <li class="navbar-item">
-                            <a class="nav-link" style="text-decoration: none;" id="current-user" href="#">User</a>
-                        </li>
-                        <li class="navbar-item">
-                            <a class="nav-link" href="#" style="text-decoration: none;">Logout</a>
-                        </li>
+                        <button id="modal-button" type="button" class="btn btn-link" data-toggle="modal"
+                            data-target="#board-modal" style="color: aliceblue;">New Board</button>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Dropdown link
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" id="user-profile" href="#">Profile</a>
+                                <a class="dropdown-item" id="user-logout" href="#">Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -94,7 +87,7 @@
         </div>
     </div>
     <!-- explore page -->
-    <div class="modal fade hide" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade hide" id="board-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
