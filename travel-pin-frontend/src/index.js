@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     listenForSignup()
     listenForExplore()
     fetchBoards()
-    listenForModal()
+    // listenForModal()
 })
 
 // signup 
@@ -60,6 +60,7 @@ function postUser(user) {
             currentUser = data
             showNavOptions()
             filloutDropDown() //adds event listener on dropdown menu
+            createBoard();
 
         })
         .catch(err => console.log(`ERROR:${err}`))
@@ -90,6 +91,7 @@ function validLogin(data, user) {
         showNavOptions()
         fetchRandomPhotos()
         filloutDropDown() //adds event listener on dropdown menu
+        createBoard()
 
     } else {
         alert("User Does Not Exist")
@@ -142,7 +144,7 @@ function showNavOptions() {
 
 // clear main area
 function clearPhotos() {
-    console.log("hiding main div")
+    console.log("hiding photos")
     const photos = document.getElementById("photos")
     photos.innerHTML = ''
 }
@@ -292,22 +294,25 @@ function listenForExplore() {
     })
 }
 
-function listenForModal() {
-    const modalButton = document.getElementById("modal-button")
-    modalButton.addEventListener("click", () => {
-        toggleModal()
-    })
-}
+// function listenForModal() {
+//     const modalButton = document.getElementById("modal-button")
+//     modalButton.addEventListener("click", () => {
+//         toggleModal()
+//     })
+// }
 
-function toggleModal() {
-    const modal = document.getElementById("exampleModal")
-    if (modal.classList.contains("hide")) {
-        console.log("model is now visible")
-        modal.classList.remove("hide")
-    } else {
-        console.log("model is hidden")
-        modal.classList.add("hide")
-    }
+function hideModal() {
+    const modal = document.getElementById("board-modal")
+    modal.classList.add("hide")
+    // modal.classList.add("dispose")
+    modal.classList.remove("show")
+    // if (modal.classList.contains("hide")) {
+    //     console.log("modal is now visible")
+    //     modal.classList.remove("hide")
+    // } else {
+    //     console.log("modal is hidden")
+    //     modal.classList.add("hide")
+    // }
 }
 
 
@@ -321,19 +326,69 @@ function filloutDropDown() {
 
     const profile = document.getElementById("user-profile");
 
-    profile.addEventListener("click", (event) => {
-
+    profile.addEventListener("click", () => {
         console.log("CLicked on Profile");
-
     });
 
     const logout = document.getElementById("user-logout");
 
-    logout.addEventListener("click", (event) => {
-
+    logout.addEventListener("click", () => {
         console.log("CLicked on logout");
-
     });
+}
 
+function createBoard() {
+    const newBoardButton = document.getElementById("new-board-button");
+    const newBoardForm = document.getElementById("new-board-form")
+    newBoardForm.addEventListener("submit", event => {
+        event.preventDefault()
+        console.log("making new board")
+        console.log(newBoardForm.value)
+        const titleText = document.getElementById("title-name");
+        console.log(titleText.value);
+        const noteText = document.getElementById("note-text");
+        console.log(noteText.value);
+        postBoard(titleText.value, noteText.value);
+
+        hideModal()
+    })
+    // newBoardButton.addEventListener("submit", event => {
+    //     event.preventDefault()
+    //     const titleText = document.getElementById("title-name");
+    //     console.log("Title", titleText.value);
+    //     const noteText = document.getElementById("note-text");
+    //     console.log("Note", noteText.value);
+    //     // hideModal()
+    // })
+}
+
+
+function postBoard(title, note) {
+    console.log("TITLE", title)
+    console.log("NOTe", note)
+
+
+    fetch('http://localhost:3000/boards', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify({
+            title: title,
+            user_id: currentUser.id,
+            note: note
+        })
+    })
+        .then(res => {
+            console.log(res)
+            return res.json()
+        })
+        .then(data => {
+            console.log(data)
+
+
+        })
+        .catch(err => console.log(`ERROR:${err}`))
 
 }

@@ -86,38 +86,42 @@
             </div>
         </div>
     </div>
-    <!-- explore page -->
+    <!-- new board modal -->
     <div class="modal fade hide" id="board-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <h5 class="modal-title" id="new-board">New Board</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="new-board-form">
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label for="title-name" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="title-name">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <label for="note-text" class="col-form-label">Note:</label>
+                            <textarea class="form-control" id="note-text"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" id="new-board-button" value="Create Board"></input>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
                 </div>
             </div>
         </div>
     </div>
-    <div id="main-div">
+    <!-- photos -->
+    <div>
         <div class="mx-5">
+            <!-- photos -->
+            <div class="card-columns" id="photos">
+            </div>
+            <!-- boards -->
             <div class="card-columns" id="photos">
             </div>
         </div>
