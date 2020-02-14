@@ -94,25 +94,27 @@ function validLogin(data, user) {
 }
 
 // delete user
+function listenForDeleteUser() {
+    const deleteUser = document.getElementById("delete-user")
+    deleteUser.addEventListener("click", () => {
+        console.log("deleting user")
+        deleteUser()
+    })
+}
+
 function deleteUser(currentUser) {
     fetch(`http://localhost:3000/users/${currentUser.id}`, {
         method: "DELETE"
+    }).then(res => {
+        if (res.status == 200) {
+            console.log("user deleted")
+            logout()
+        }
     })
 }
 
 // edit user
-// function editUserForm() {
-//     let editForm = document.getElementById("edit-form")
-//     let editInput = document.getElementById("edit-input")
-//     editInput.value = currentUser.name
-//     editForm.addEventListener("submit", event => {
-//         event.preventDefault()
-//         let newName = editInput.value
-//         editUser(currentUser, newName)
-//     })
-// }
-
-function editUser(currentUser, newName) {
+function updateUser(currentUser, newName) {
     fetch(`http://localhost:3000/users/${currentUser.id}`, {
         method: "PATCH",
         headers: {
@@ -123,11 +125,47 @@ function editUser(currentUser, newName) {
     })
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             editedUser = data
             let currentUserElement = document.getElementById("current-user")
             currentUserElement.textContent = editedUser.name
         })
         .catch(err => console.log(`ERROR: ${err}`))
+}
+
+function listenForEditUser() {
+    const editUserForm = document.getElementById("edit-user-form")
+    editUserForm.addEventListener("submit", event => {
+        event.preventDefault()
+        console.log("editing user")
+        const newName = document.getElementById("user-name");
+        // updateUser(currentUser, newName);
+
+        // hideModal()
+    })
+}
+
+// profile
+function listenForProfile() {
+    const profile = document.getElementById("user-profile")
+    profile.addEventListener("click", () => {
+        clearPhotos()
+        showProfile()
+    })
+}
+
+function showProfile() {
+    const profileDiv = document.getElementById("profile-div")
+    const userNameH2 = document.createElement("h2")
+    userNameH2.textContent = currentUser.name
+    const editButton = document.createElement("button")
+    editButton.type = "button"
+    editButton.className = "btn btn-link"
+    editButton.setAttribute("data-toggle", "modal")
+    editButton.setAttribute("data-target", "#edit-user-modal")
+    editButton.textContent = "Edit"
+    userNameH2.appendChild(editButton)
+    profileDiv.appendChild(userNameH2)
 }
 
 // nav bar
@@ -291,29 +329,6 @@ function hideModal() {
     modal.classList.remove("show")
 }
 
-// profile
-function listenForProfile() {
-    const profile = document.getElementById("user-profile")
-    profile.addEventListener("click", () => {
-        clearPhotos()
-        showProfile()
-    })
-}
-
-function showProfile() {
-    const profileDiv = document.getElementById("profile-div")
-    const userNameH2 = document.createElement("h2")
-    userNameH2.textContent = currentUser.name
-    const editButton = document.createElement("button")
-    editButton.type = "button"
-    editButton.className = "btn btn-link"
-    editButton.setAttribute("data-toggle", "modal")
-    editButton.setAttribute("data-target", "#edit-user-modal")
-    editButton.textContent = "Edit"
-    userNameH2.appendChild(editButton)
-    profileDiv.appendChild(userNameH2)
-}
-
 //<----------------------------------------------------------------------------->
 
 // ERICS EDITS
@@ -332,8 +347,12 @@ function filloutDropDown() {
 
     logout.addEventListener("click", () => {
         console.log("CLicked on logout");
-        document.location.reload(true);
+        logout()
     });
+}
+
+function logout() {
+    document.location.reload(true);
 }
 
 // new board
